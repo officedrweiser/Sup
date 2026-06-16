@@ -1,6 +1,28 @@
 /* Supprasupps – Main JS */
 
 // ===========================
+// COOKIE BANNER
+// ===========================
+(function () {
+  const COOKIE_KEY = 'supprasupps_cookie_consent';
+  const banner = document.getElementById('cookieBanner');
+  const btnAccept = document.getElementById('cookieAccept');
+  const btnDecline = document.getElementById('cookieDecline');
+
+  if (!localStorage.getItem(COOKIE_KEY)) {
+    setTimeout(() => banner.classList.add('visible'), 800);
+  }
+
+  function dismiss(choice) {
+    localStorage.setItem(COOKIE_KEY, choice);
+    banner.classList.remove('visible');
+  }
+
+  btnAccept.addEventListener('click', () => dismiss('all'));
+  btnDecline.addEventListener('click', () => dismiss('necessary'));
+})();
+
+// ===========================
 // SCROLL REVEAL
 // ===========================
 const observer = new IntersectionObserver(
